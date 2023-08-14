@@ -3,7 +3,9 @@ guid: 347a02757e57c5946852900b83059181
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - FacaCyberpunk: {fileID: 4907673764558933866, guid: 493806f48b187b8458e112c9d2fce863, type: 3}
+  - DisparoTriplo: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

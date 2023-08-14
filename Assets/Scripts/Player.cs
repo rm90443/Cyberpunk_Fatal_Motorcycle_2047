@@ -8,13 +8,13 @@ public class Player : MonoBehaviour
     public float entradaHorizontal ;
     public float entradaVertical ;
 
-    public GameObject pfLaser ;
+    public GameObject FacaCyberpunk ;
     
     public float tempoDeDisparo = 0.5f ;
     public float podeDisparar = 0.0f ;
 
-    public bool possoDarDisparoTriplo = false ;
-    public GameObject DisparoTriplo ;
+    public bool FacaChamasLigado = false ;
+    public GameObject FacaChamas ;
 
 
     // Start is called before the first frame update
@@ -30,29 +30,12 @@ public class Player : MonoBehaviour
     {
        
         Movimento();
- 
-         
+
+        Disparo();
 
         if (Input.GetKeyDown(KeyCode.Space)){
 
-            if ( Time.time > podeDisparar ){
-               
-               if (possoDarDisparoTriplo == true ){
-
-                   Instantiate(DisparoTriplo,transform.position + new Vector3(-7.108244f,0,0),Quaternion.identity);
-
-               } else {   
-
-                   Instantiate(pfLaser,transform.position + new Vector3(0.74f,0,0),Quaternion.identity);
-               }
-               
-                
-
-
-
-
-                podeDisparar = Time.time + tempoDeDisparo ;
-            }
+        
  
         }
        
@@ -89,8 +72,52 @@ public class Player : MonoBehaviour
 
    }
 
+    private void Disparo()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (Time.time > podeDisparar)
+            {
+
+                if (FacaChamasLigado == true)
+                {
+
+                    Instantiate(FacaChamas, transform.position + new Vector3(-7.108244f, 0, 0), Quaternion.identity);
+
+                }
+                else
+                {
+
+                    Instantiate(FacaCyberpunk, transform.position + new Vector3(0.74f, 0, 0), Quaternion.identity);
+                }
 
 
 
 
+
+
+                podeDisparar = Time.time + tempoDeDisparo;
+            }
+
+
+        }
+    }
+    public IEnumerator FacaChamasRotina()
+    {
+
+        yield return new WaitForSeconds(7.0f);
+
+        FacaChamasLigado = false;
+
+    }
+
+    public void LigarFacaChamasPowerUp()
+    {
+
+        FacaChamasLigado = true;
+        StartCoroutine(FacaChamasRotina());
+
+    }
 }
+
+
